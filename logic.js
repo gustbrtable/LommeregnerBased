@@ -1,5 +1,5 @@
 window.actions = {};
-hey
+
 actions.add = {};
 actions.add.types = [Number, Number, Number];
 actions.add.function = function(a, b, c){
@@ -17,7 +17,7 @@ actions.add1 = {
 actions.sortOnLength = {
     types: [String, String, String],
     function: function(a, b, c){
-        return "a aa aaa";
+        return "a bb ccc";
     }    
 }
 
@@ -36,6 +36,26 @@ actions.averageAge = {
         return -1;
     }
 };
+// returns sårbarhed of a single product
+actions.productVulnerability = {
+    types: [Number, Number, Number],
+    function: function(disruptive, irreplacible, damaging){
+        if((disruptive + irreplacible + damaging)/3 <=1)
+            return "Ikke Kritisk";
+        else if ((disruptive + irreplacible + damaging)/3 <=4)
+            return "Besværlig";
+        else return "Kritisk";
+    }
+   }
+   // returns 'sårbarhed' of the three products in an array
+   // each product has properties disruptive, irreplacible, and damaging,
+   actions.vulnerability = {
+    types: [JSON.parse, JSON.parse, JSON.parse],
+    function: function(p1, p2, p3){
+   
+    return [ -1, -1, -1];
+    }
+   };
 
 window.runTest = function(actionName, actions, testData){
     var result = "";
