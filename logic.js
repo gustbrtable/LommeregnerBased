@@ -40,11 +40,10 @@ actions.averageAge = {
 actions.productVulnerability = {
     types: [Number, Number, Number],
     function: function(disruptive, irreplacible, damaging){
-        if((disruptive + irreplacible + damaging)/3 <=1)
-            return "Ikke Kritisk";
-        else if ((disruptive + irreplacible + damaging)/3 <=4)
-            return "Besværlig";
-        else return "Kritisk";
+        var average = (disruptive + irreplacible + damaging)/3;
+        var index = average -1;
+        var categories = ["Ikke Kritisk", "Lav Sårbarhed","Besværlig", "Sårbar", "Kritisk"]
+            return categories [index];
     }
    }
    // returns 'sårbarhed' of the three products in an array
@@ -52,11 +51,17 @@ actions.productVulnerability = {
    actions.vulnerability = {
     types: [JSON.parse, JSON.parse, JSON.parse],
     function: function(p1, p2, p3){
-   
-    return [ -1, -1, -1];
-    }
+        var products = [p1,p2,p3];
+        var result =["FEJL", "FEJL", "FEJL"];
+        for(var i = 0, i < products.length; i++)
+        result[i] = actions.productVulnerability.function(
+            products[1].disruptive, 
+            prducts[1].irreplacible, 
+            products[1].damaging
+            )
+       return result;
    };
-
+};
 window.runTest = function(actionName, actions, testData){
     var result = "";
     var functionUnderTest = actions[actionName].function;
